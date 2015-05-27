@@ -1,0 +1,1 @@
+javascript:(function(){alert('toto');%0D%0A})();

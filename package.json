@@ -1,0 +1,19 @@
+{
+  "name": "bjm",
+  "title": "Bjm",
+  "description": "Turn any website into a website full of sexy woman/man",
+  "author": {
+    "name": "Korri",
+    "url": "http://dogefaucet.com/"
+  },
+  "version": "0.0.1",
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-bookmarklet-wrapper": "^1.0.0",
+    "grunt-contrib-watch": "^0.6.1"
+  }
+}
