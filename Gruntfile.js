@@ -6,14 +6,48 @@ module.exports = function (grunt) {
         bookmarklet_wrapper: {
             bookmarklets: {
                 files: {
-                    'dist/bjm.js': ['src/bjm.js']
+                    'dist/babeify.js': ['.tmp/babeify.js', '.tmp/common.js'],
+                    'dist/hunkify.js': ['.tmp/hunkify.js', '.tmp/common.js']
                 }
             },
         },
+        uglify: {
+            hunk: {
+                files: [{
+                    expand: true,
+                    cwd: 'src',
+                    src: '*.js',
+                    dest: '.tmp'
+                }]
+            }
+        },
+        replace: {
+            readme: {
+                options: {
+                    patterns: [
+                        {
+                            match: 'babeify',
+                            replacement: '<%= grunt.file.read("dist/babeify.js") %>'
+                        },
+                        {
+                            match: 'hunkify',
+                            replacement: '<%= grunt.file.read("dist/hunkify.js") %>'
+                        },
+                    ]
+                },
+                files: [
+                    {expand: true, flatten: true, src: ['src/README.md'], dest: ''}
+                ]
+            }
+        },
+        clean: {
+            dist: ['dist'],
+            tmp: ['.tmp']
+        },
         watch: {
-            bjm: {
-                files: '<%= bookmarklet_wrapper.bookmarklets.files["dist/bjm.js"] %>',
-                tasks: ['bookmarklet_wrapper:bookmarklets'],
+            bookmarklets: {
+                files: ['src/babeify.js', 'src/hunkify.js', 'src/common.js'],
+                tasks: ['build'],
             },
         }
     });
@@ -21,4 +55,9 @@ module.exports = function (grunt) {
     // These plugins provide necessary tasks.
     grunt.loadNpmTasks('grunt-bookmarklet-wrapper');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-replace');
+    grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+
+    grunt.registerTask('build', ['clean:dist', 'uglify', 'bookmarklet_wrapper', 'replace', 'clean:tmp']);
 };
