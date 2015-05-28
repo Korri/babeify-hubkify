@@ -5,7 +5,7 @@ window.jQuery || document.write("<script src='https://ajax.googleapis.com/ajax/l
 (function ($) {
     $("img").each(function () {
         var e = $(this);
-        e.attr("src", "http://babeholder.pixoil.com/img/" + e.width() + "/" + e.height() + "/" + 1e4 * Math.random())
+        e.attr("src", forge_url(e.width(), e.height()));
     });
     $("*").filter(function () {
         var bg_image = "none";
