@@ -1,6 +1,8 @@
 #Babeify & Hunkify
 > Bookmarklet that replace all images with randome images from [bonjourmadame.fr](http://bonjourmadame.fr) or [bonjourmonsieur.fr](http://bonjourmonsieur.fr)
 
+More info at [http://korri.github.io/babeify-hunkify](http://korri.github.io/babeify-hunkify)
+
 ##Babeify code
 ```javascript
 @@babeify
