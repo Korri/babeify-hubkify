@@ -45,6 +45,10 @@ module.exports = function (grunt) {
             tmp: ['.tmp']
         },
         watch: {
+            readme: {
+                files: ['src/README.md'],
+                tasks: ['replace'],
+            },
             bookmarklets: {
                 files: ['src/babeify.js', 'src/hunkify.js', 'src/common.js'],
                 tasks: ['build'],
