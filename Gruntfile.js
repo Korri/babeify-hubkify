@@ -22,7 +22,7 @@ module.exports = function (grunt) {
             }
         },
         replace: {
-            readme: {
+            bookmarklets: {
                 options: {
                     patterns: [
                         {
@@ -36,13 +36,21 @@ module.exports = function (grunt) {
                     ]
                 },
                 files: [
-                    {expand: true, flatten: true, src: ['src/README.md'], dest: ''}
+                    {expand: true, flatten: true, src: ['src/README.md'], dest: ''},
+                    {expand: true, flatten: true, src: ['src/index.html'], dest: '.gh'}
                 ]
             }
         },
         clean: {
             dist: ['dist'],
-            tmp: ['.tmp']
+            tmp: ['.tmp'],
+            'gh-pages': ['.gh', '.grunt']
+        },
+        'gh-pages': {
+            options: {
+                base: '.gh'
+            },
+            src: ['**']
         },
         watch: {
             readme: {
@@ -62,6 +70,8 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-replace');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-gh-pages');
 
     grunt.registerTask('build', ['clean:dist', 'uglify', 'bookmarklet_wrapper', 'replace', 'clean:tmp']);
+    grunt.registerTask('build-pages', ['replace', 'gh-pages', 'clean:gh-pages']);
 };
